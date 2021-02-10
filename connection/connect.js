@@ -2,6 +2,7 @@ const mysql = require('mysql')
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
+    database: 'first_health'
 })
 
 const run = () => {
@@ -14,4 +15,4 @@ const run = () => {
     })
 }
 
-module.exports = {run}
+module.exports = {run, connection}
