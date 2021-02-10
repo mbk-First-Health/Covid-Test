@@ -64,6 +64,17 @@ class Customer {
             })
         })
     }
+	static deleteById(id) {
+		const query = "delete from customers where id= ?"
+		return  new Promise((resolve, reject) => {
+			conn.query(query, id, function(err, res, field) {
+				if (err) {
+					reject(err)
+				}
+				resolve(res)
+			})
+		})
+	}
 
 }
 
