@@ -49,6 +49,7 @@ class CustomerController {
 				})
 			})
 			.catch(next)
+	}
 }
 
 module.exports = CustomerController
