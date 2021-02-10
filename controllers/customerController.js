@@ -36,8 +36,19 @@ class CustomerController {
 					msg: "berhasil menghapus record"
 				})
 			})
-			.catch(nex)
+			.catch(next)
 	}
+
+	static updateCustomer(req, res, next) {
+		const { cust_id } = req.params
+		Customer.update(cust_id)
+			.then(res => {
+				res.status(200).json({
+					msg: 'Berhasil ubah data customer',
+					res
+				})
+			})
+			.catch(next)
 }
 
 module.exports = CustomerController
