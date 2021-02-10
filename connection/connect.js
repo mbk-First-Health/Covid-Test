@@ -4,10 +4,14 @@ const connection = mysql.createConnection({
     user: 'root',
 })
 
-connection.connect(function(err) {
-    if(err) {
-        console.log('error connecting: ' + err.stack)
-        return
-    }
-    console.log('connected as id ' + connection.threadId)
-})
+const run = () => {
+        connection.connect(function(err) {
+        if(err) {
+            console.log('error connecting: ' + err.stack)
+            return
+        }
+        console.log('connected as id ' + connection.threadId)
+    })
+}
+
+module.exports = {run}
