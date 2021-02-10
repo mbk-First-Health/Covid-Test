@@ -1,14 +1,8 @@
-// Class CustomerController {
-//     constructor(nama, jenisKelamin, umur, alamat, noHp, suhu){
-//         this.nama = nama;
-//         this.jk = jenisKelamin,
-//         this.umur = umur;
-//         this.alamat = alamat;
-//         this.noHp = noHp;
-//         this.suhu = suhu
-//     }
+const Customer = require('../models/customer')
+class CustomerController {
+    static getCustomers() {
+       return Customer.findAll()
+    }
+}
 
-    
-// }
-
-// module.exports = CustomerController
+module.exports = CustomerController
