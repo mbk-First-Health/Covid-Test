@@ -1,6 +1,6 @@
 const Customer = require('../models/testResult')
 class TestResultController {
-    addTestResult(req, res, next) {
+    static addTestResult(req, res, next) {
 
         Customer.addTestResult(req.body)
             .then(tr => {
@@ -9,7 +9,7 @@ class TestResultController {
             .catch(next)
     }
 
-    getTestResultByCustId(req, res, next) {
+    static getTestResultByCustId(req, res, next) {
         Customer.getTestResultByCustId(req.params.id)
             .then(tr => {
                 if (!tr) {
