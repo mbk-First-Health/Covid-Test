@@ -1,10 +1,10 @@
 const router = require('express').Router()
-const CustCtrl = require('../controller/customerController')
+const CustCtrl = require('../controllers/customerController')
 
-router.get('/customers', CustCtrl.getCustomers)
-router.get('/customers/:id', CustCtrl.getCustById)
-router.delete('/customers/:id', CustCtrl.delCustomer)
-router.put('/customers/:id', CustCtrl.updateCustomer)
+router.get('/', CustCtrl.getCustomers)
+router.get('/:id', CustCtrl.findCustById)
+router.delete('/:id', CustCtrl.delCustomer)
+router.put('/:id', CustCtrl.updateCustomer)
 
-moduls.exports = router
+module.exports = router
 

@@ -8,7 +8,7 @@ class Customer {
                     if(err) {
                         reject(err)
                     }
-                    resolve({res, field})
+                    resolve(res)
            })
         })
     }
@@ -20,7 +20,7 @@ class Customer {
                 if (err) {
                     reject(err)
                 }
-                resolve({res, field})
+                resolve(res)
             })
         })
     }
@@ -32,7 +32,7 @@ class Customer {
                 if (err) {
                     reject(err)
                 }
-                resolve(res)
+                resolve(res[0])
             })
         })
     }
@@ -47,7 +47,7 @@ class Customer {
                 if (err) {
                     reject(err)
                 }
-                resolve({res, field})
+                resolve(res)
             })
         })
     }

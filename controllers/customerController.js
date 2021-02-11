@@ -20,32 +20,46 @@ class CustomerController {
 	}
 	
 	static findCustById(req, res, next) {
-		const { cust_id } = req.params
-		Customer.findById(cust_id)
+		const { id } = req.params
+		Customer.findbyId(id)
 			.then(cust => {
-				rest.status(200).json(cust)
+				if (!cust) {
+					res.locals.id = id
+					throw new Error('not found')
+				}
+				res.status(200).json(cust)
 			})
 			.catch(next)
 	}
 
 	static delCustomer(req, res, next) {
-		const {cust_id} = req.params
-		Customer.deleteById(cust_id)
-			.then(res => {
+		const {id} = req.params
+		Customer.deleteById(id)
+			.then(data => {
+				if (data.affectedRows == 0) {
+					res.locals.id = id
+					throw new Error('not found')
+				}
 				res.status(200).json({
-					msg: "berhasil menghapus record"
+					msg: "berhasil menghapus record",
+					data
 				})
 			})
 			.catch(next)
 	}
 
 	static updateCustomer(req, res, next) {
-		const { cust_id } = req.params
-		Customer.update(cust_id)
-			.then(res => {
+		const { id } = req.params
+		const data = req.body
+		Customer.update({id, ...data})
+			.then(data => {
+				if (data.affectedRows == 0) {
+					res.locals.id = id
+					throw new Error('not found')
+				}
 				res.status(200).json({
 					msg: 'Berhasil ubah data customer',
-					res
+					data
 				})
 			})
 			.catch(next)
