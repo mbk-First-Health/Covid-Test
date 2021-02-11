@@ -9,12 +9,14 @@ class CustomerController {
 	}
 
 	static newCustomer(req, res, next) {
+		console.log(req.body)
 		Customer.create(req.body)
-			.then(res => {
-				req.status(201).json({
-					message: 'Customer berhasil ditambahkan',
-					res
-				})
+			.then(cust => {
+			//	req.status(201).json({
+			//		message: 'Customer berhasil ditambahkan',
+			//		res
+			//	})
+				res.render('index', { status : res.status(201), cust})
 			})
 			.catch(next)
 	}
