@@ -38,12 +38,9 @@ class Customer {
     }
 
     static create(data) {
-        let { jenisKelamin,noHp, ...cust} = data
-        cust.jenis_kelamin = jenisKelamin
-        cust.no_hp = noHp
         const query = "insert into customers set ?"
         return new Promise((resolve, reject) => {
-            conn.query(query, cust, function(err, res, field) {
+            conn.query(query, data, function(err, res, field) {
                 if (err) {
                     reject(err)
                 }
