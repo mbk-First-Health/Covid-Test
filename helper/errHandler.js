@@ -14,6 +14,11 @@ module.exports = function name(err, req, res, next) {
 		res.status(400).json({
 			msg: "Silahkan isi form terlebih dahulu!"
 		})
+	} else {
+		res.status(400).json({
+			code: err.code,
+			msg: err.sqlMessage
+		})
 	}
 
 }
