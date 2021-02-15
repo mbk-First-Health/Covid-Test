@@ -10,6 +10,10 @@ module.exports = function name(err, req, res, next) {
 		res.status(400).json({
 			msg: "field " + field + " tidak boleh kosong!"
 		})
+	} else if (err.code == 'ER_PARSE_ERROR') {
+		res.status(400).json({
+			msg: "Silahkan isi form terlebih dahulu!"
+		})
 	}
 
 }
