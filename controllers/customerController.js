@@ -1,19 +1,21 @@
 const Customer = require('../models/customer')
+const { validateNoHp } = require('../helper/validation')
 class CustomerController {
 	static getCustomers(req, res, next) {
 		Customer.findAll()
 			.then(customers => {
-				res.status(200).json(customers);
+				res.status(200).json({statusCode: 200, customers});
 			})
 			.catch(next)
 	}
 
 	static newCustomer(req, res, next) {
 		Customer.create(req.body)
-			.then(res => {
-				req.status(201).json({
+			.then(cust => {
+				res.status(201).json({
 					message: 'Customer berhasil ditambahkan',
-					res
+					statusCode: 201,
+					cust
 				})
 			})
 			.catch(next)
@@ -27,7 +29,7 @@ class CustomerController {
 					res.locals.id = id
 					throw new Error('not found')
 				}
-				res.status(200).json(cust)
+				res.status(200).json({statusCode: 200, cust})
 			})
 			.catch(next)
 	}
@@ -42,6 +44,7 @@ class CustomerController {
 				}
 				res.status(200).json({
 					msg: "berhasil menghapus record",
+					statusCode: 200,
 					data
 				})
 			})
@@ -59,6 +62,7 @@ class CustomerController {
 				}
 				res.status(200).json({
 					msg: 'Berhasil ubah data customer',
+					statusCode: 200,
 					data
 				})
 			})
