@@ -10,6 +10,22 @@ class CustomerController {
 	}
 
 	static newCustomer(req, res, next) {
+        const fields = [ 'nama', 'umur', 'alamat', 'jenis_kelamin', 'no_hp', 'jenis_sample', 'suhu' ]
+        const emptyField = {}
+        
+        for (const f of fields) {
+            if (req.body[f] == undefined) {
+                emptyField[f] = true
+            }
+        }
+        if (Object.keys(emptyField).length !== 0 && emptyField.constructor === Object) {
+            let err = {
+                code: "MISSING_FIELD",
+                field: emptyField
+            }
+            return next(err)
+        }
+        console.log("masuk pak", "<<<")
 		Customer.create(req.body)
 			.then(cust => {
 				res.status(201).json({
