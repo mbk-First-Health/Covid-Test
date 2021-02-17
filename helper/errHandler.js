@@ -5,15 +5,11 @@ module.exports = function name(err, req, res, next) {
             res.status(404).json({
                 msg: "pelanggan dengan id " + res.locals.id + " tidak ditemukan"
             })
-	} else if (err.code == 'ER_NO_DEFAULT_FOR_FIELD') {
-		const field = err.sqlMessage.split(" ")[1];
-		res.status(400).json({
-			msg: "field " + field + " tidak boleh kosong!"
-		})
-	} else if (err.code == 'ER_PARSE_ERROR') {
-		res.status(400).json({
-			msg: "Silahkan isi form terlebih dahulu!"
-		})
+	} else if (err.code == 'MISSING_FIELD') {
+        res.status(400).json({
+            code: err.code,
+            data: err.field
+        })
 	} else {
 		res.status(400).json({
 			code: err.code,
